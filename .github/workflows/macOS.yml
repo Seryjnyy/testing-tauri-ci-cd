@@ -20,6 +20,14 @@ jobs:
         with:
           node-version: '18' # Specify the Node.js version you want to use
 
+     # Step 3: Set up Rust
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable # Use the stable Rust toolchain
+          profile: minimal # Install only essential components
+          override: true # Make this the default Rust version
+
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
