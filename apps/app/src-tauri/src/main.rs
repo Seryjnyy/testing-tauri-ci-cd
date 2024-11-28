@@ -11,6 +11,8 @@ use nanoid::nanoid;
 use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 
+use std::process::Command;
+
 use lazy_static::lazy_static;
 
 use std::fs::File;
@@ -29,7 +31,7 @@ async fn show_in_explorer(path: String) {
     // TODO : No error handling whatsoever
     #[cfg(target_os = "windows")]
     {
-        let _ = std::process::Command::new("explorer")
+        let _ = Command::new("explorer")
             .args(["/select,", &path])
             .spawn()
             .map_err(|e| e.to_string());
