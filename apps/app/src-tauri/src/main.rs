@@ -27,14 +27,14 @@ lazy_static! {
 // TODO : untested on other platforms
 // But works for now
 #[tauri::command]
-async fn show_in_explorer(path: String) {
+async fn show_in_explorer(path: String) -> Result<(), String> {
     // TODO : No error handling whatsoever
     #[cfg(target_os = "windows")]
     {
-        let _ = Command::new("explorer")
+        Command::new("explorer")
             .args(["/select,", &path])
             .spawn()
-            .map_err(|e| e.to_string());
+            .map_err(|e| e.to_string())?;
     }
 
     #[cfg(target_os = "macos")]
@@ -74,6 +74,8 @@ async fn show_in_explorer(path: String) {
             }
         }
     }
+
+     Ok(())
 }
 
 use std::fs;
