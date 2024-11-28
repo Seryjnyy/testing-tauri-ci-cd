@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-test
+
 ![Logo](/Images/banner.svg)
 
   <p align="center">
