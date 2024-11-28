@@ -2,7 +2,7 @@ name: 'publish'
 
 on:
   issues:
-    types:[opened]
+    types:[opened, edited, deleted, closed, pinned, unpinned]
       
 
 # This workflow will trigger on each push to the `release` branch to create or update a GitHub release, build your app, and upload the artifacts to the release.
