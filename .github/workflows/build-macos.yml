@@ -1,25 +1,36 @@
-name: Build macOS Tauri
+name: Build macOS Tauri App
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main # Trigger on pushes to the "main" branch
 
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout code
-      run: actions/checkout@v3
-      
-    - name: Install dependencies
-      run: npm install
+      # Step 1: Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Build desktop app
-      run: npm run build --workspace=app
+      # Step 2: Install Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Specify the Node.js version you want to use
 
-    - name: Upload macOS Artifact
-      uses: actions/upload-artifact@v3
-      with:
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the Tauri app
+      - name: Build Tauri App
+        run: npm run build --workspace=app
+
+      # Step 5: Upload the macOS installer artifact
+      - name: Upload macOS Installer
+        uses: actions/upload-artifact@v3
+        with:
           name: macOS-installer
           path: src-tauri/target/release/bundle/dmg/
